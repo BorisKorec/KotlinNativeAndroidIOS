@@ -12,7 +12,33 @@
 		F4105A7D22B1004B00776E0C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4105A7B22B1004B00776E0C /* Main.storyboard */; };
 		F4105A7F22B1004C00776E0C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F4105A7E22B1004C00776E0C /* Assets.xcassets */; };
 		F4105A8222B1004C00776E0C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4105A8022B1004C00776E0C /* LaunchScreen.storyboard */; };
+		F4105A9522B1023900776E0C /* Shared.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4105A8E22B1023900776E0C /* Shared.framework */; };
+		F4105A9622B1023900776E0C /* Shared.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F4105A8E22B1023900776E0C /* Shared.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		F4105A9322B1023900776E0C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F4105A6C22B1004B00776E0C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F4105A8D22B1023900776E0C;
+			remoteInfo = Shared;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		F4105A9A22B1023900776E0C /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				F4105A9622B1023900776E0C /* Shared.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		F4105A7422B1004B00776E0C /* KotlinNativeAndroidIOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KotlinNativeAndroidIOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -22,10 +48,21 @@
 		F4105A7E22B1004C00776E0C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F4105A8122B1004C00776E0C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F4105A8322B1004C00776E0C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F4105A8E22B1023900776E0C /* Shared.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Shared.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F4105A9022B1023900776E0C /* Shared.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Shared.h; sourceTree = "<group>"; };
+		F4105A9122B1023900776E0C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		F4105A7122B1004B00776E0C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F4105A9522B1023900776E0C /* Shared.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F4105A8B22B1023900776E0C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -39,6 +76,7 @@
 			isa = PBXGroup;
 			children = (
 				F4105A7622B1004B00776E0C /* KotlinNativeAndroidIOS */,
+				F4105A8F22B1023900776E0C /* Shared */,
 				F4105A7522B1004B00776E0C /* Products */,
 			);
 			sourceTree = "<group>";
@@ -47,6 +85,7 @@
 			isa = PBXGroup;
 			children = (
 				F4105A7422B1004B00776E0C /* KotlinNativeAndroidIOS.app */,
+				F4105A8E22B1023900776E0C /* Shared.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -64,6 +103,15 @@
 			path = KotlinNativeAndroidIOS;
 			sourceTree = "<group>";
 		};
+		F4105A8F22B1023900776E0C /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				F4105A9022B1023900776E0C /* Shared.h */,
+				F4105A9122B1023900776E0C /* Info.plist */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -74,15 +122,33 @@
 				F4105A7022B1004B00776E0C /* Sources */,
 				F4105A7122B1004B00776E0C /* Frameworks */,
 				F4105A7222B1004B00776E0C /* Resources */,
+				F4105A9A22B1023900776E0C /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				F4105A9422B1023900776E0C /* PBXTargetDependency */,
 			);
 			name = KotlinNativeAndroidIOS;
 			productName = KotlinNativeAndroidIOS;
 			productReference = F4105A7422B1004B00776E0C /* KotlinNativeAndroidIOS.app */;
 			productType = "com.apple.product-type.application";
+		};
+		F4105A8D22B1023900776E0C /* Shared */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F4105A9722B1023900776E0C /* Build configuration list for PBXNativeTarget "Shared" */;
+			buildPhases = (
+				F4105A9B22B1028400776E0C /* ShellScript */,
+				F4105A8B22B1023900776E0C /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Shared;
+			productName = Shared;
+			productReference = F4105A8E22B1023900776E0C /* Shared.framework */;
+			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
 
@@ -95,6 +161,9 @@
 				ORGANIZATIONNAME = "Boris Korec";
 				TargetAttributes = {
 					F4105A7322B1004B00776E0C = {
+						CreatedOnToolsVersion = 10.2.1;
+					};
+					F4105A8D22B1023900776E0C = {
 						CreatedOnToolsVersion = 10.2.1;
 					};
 				};
@@ -113,6 +182,7 @@
 			projectRoot = "";
 			targets = (
 				F4105A7322B1004B00776E0C /* KotlinNativeAndroidIOS */,
+				F4105A8D22B1023900776E0C /* Shared */,
 			);
 		};
 /* End PBXProject section */
@@ -130,6 +200,26 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		F4105A9B22B1028400776E0C /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"../../gradlew\" -p \"../../Shared\" provideIOSFramework \\\n-PXCODE_CONFIGURATION=${CONFIGURATION} \\\n-PXCODE_BUILD_DIR=${CONFIGURATION_BUILD_DIR}\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		F4105A7022B1004B00776E0C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -141,6 +231,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		F4105A9422B1023900776E0C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F4105A8D22B1023900776E0C /* Shared */;
+			targetProxy = F4105A9322B1023900776E0C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		F4105A7B22B1004B00776E0C /* Main.storyboard */ = {
@@ -312,6 +410,60 @@
 			};
 			name = Release;
 		};
+		F4105A9822B1023900776E0C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = Shared/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.avast.kotlinnativeandroidios.Shared;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		F4105A9922B1023900776E0C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = Shared/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.avast.kotlinnativeandroidios.Shared;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -329,6 +481,15 @@
 			buildConfigurations = (
 				F4105A8722B1004C00776E0C /* Debug */,
 				F4105A8822B1004C00776E0C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F4105A9722B1023900776E0C /* Build configuration list for PBXNativeTarget "Shared" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F4105A9822B1023900776E0C /* Debug */,
+				F4105A9922B1023900776E0C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
