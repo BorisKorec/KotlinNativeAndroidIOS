@@ -2,10 +2,36 @@ apply plugin: 'kotlin-multiplatform'
 kotlin {
     targets {
         fromPreset(presets.jvm, 'android')
+
+        final def iOSTarget = System.getenv('SDK_NAME')?.startsWith("iphoneos") ? presets.iosArm64 : presets.iosX64
+        fromPreset(iOSTarget, 'ios') {
+            binaries {
+                framework('Shared')
+            }
+        }
     }
     sourceSets {
         commonMain.dependencies {
             implementation "org.jetbrains.kotlin:kotlin-stdlib-common:1.3.10"
+        }
+    }
+}
+
+task provideIOSFramework {
+    final String mode = project.findProperty("XCODE_CONFIGURATION")?.toUpperCase() ?: 'DEBUG'
+    final def framework = kotlin.targets.ios.binaries.getFramework("Shared", mode)
+
+    inputs.property "mode", mode
+    dependsOn framework.linkTask
+
+    doLast {
+        def srcFile = framework.outputFile
+        def targetDir = getProperty("XCODE_BUILD_DIR")
+        copy {
+            from srcFile.parent
+            into targetDir
+            include 'Shared.framework/**'
+            include 'Shared.framework.dSYM'
         }
     }
 }
