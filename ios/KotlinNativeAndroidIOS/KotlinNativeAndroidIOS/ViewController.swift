@@ -16,6 +16,16 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         label.text = CommonKt.getSharedModuleString()
+        
+        let api = PlaceholderApi()
+        api.callGetPost(id: 1) { result -> KotlinUnit in
+            print(result)
+            self.label.text = result
+            return KotlinUnit()
+        }
+        
+        
+        
     }
 
 
