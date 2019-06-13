@@ -18,14 +18,11 @@ class ViewController: UIViewController {
         label.text = CommonKt.getSharedModuleString()
         
         let api = PlaceholderApi()
-        api.callGetPost(id: 1) { result -> KotlinUnit in
-            print(result)
-            self.label.text = result
+        api.callGetPost(id: 1) { post -> KotlinUnit in
+            print(post.title)
+            self.label.text = post.title
             return KotlinUnit()
         }
-        
-        
-        
     }
 
 

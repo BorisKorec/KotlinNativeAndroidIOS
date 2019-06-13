@@ -17,15 +17,14 @@ class MainActivity : AppCompatActivity(), CoroutineScope {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        findViewById<TextView>(R.id.txtSharedText).setText(getSharedModuleString())
-
+        findViewById<TextView>(R.id.txtSharedText).text = getSharedModuleString()
 
         val api = PlaceholderApi()
 
         api.callGetPost(1) {
-            Log.d("MainActivity", "data: " + it)
+            Log.d("MainActivity", "title: ${it.title}")
             launch {
-                findViewById<TextView>(R.id.txtSharedText).setText(it)
+                findViewById<TextView>(R.id.txtSharedText).text = it.title
             }
         }
     }
