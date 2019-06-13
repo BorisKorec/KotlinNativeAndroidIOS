@@ -1,0 +1,5 @@
+package com.avast.kotlinnativeandroidios
+
+import kotlinx.coroutines.CoroutineDispatcher
+
+internal expect val ApplicationDispatcher: CoroutineDispatcher
