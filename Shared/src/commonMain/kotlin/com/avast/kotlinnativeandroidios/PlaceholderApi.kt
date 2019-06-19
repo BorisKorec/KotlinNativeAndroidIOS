@@ -14,6 +14,7 @@ import kotlinx.serialization.list
 class PlaceholderApi {
 
     val client = HttpClient()
+    val userMap: HashMap<Int, User> = HashMap()
 
     fun getPost(id: Int, success: (Post) -> Unit, failure: (Throwable?) -> Unit) {
         GlobalScope.launch(ApplicationDispatcher) {
@@ -98,6 +99,5 @@ class PlaceholderApi {
 
     companion object Constants {
         val BASE_URL = "https://jsonplaceholder.typicode.com"
-        val userMap: HashMap<Int, User> = HashMap()
     }
 }
