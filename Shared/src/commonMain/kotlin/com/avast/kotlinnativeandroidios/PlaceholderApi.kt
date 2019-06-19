@@ -6,6 +6,8 @@ import io.ktor.client.request.get
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.serialization.json.Json
+import kotlinx.serialization.list
+import kotlinx.serialization.parseList
 
 class PlaceholderApi {
 
@@ -25,6 +27,18 @@ class PlaceholderApi {
 //                method = HttpMethod.Get
 //            }
 //            success(call.response.receive())
+        }
+    }
+
+    fun getPosts(success: (List<Post>) -> Unit, failure: (Throwable?) -> Unit) {
+        GlobalScope.launch(ApplicationDispatcher) {
+            try {
+                val json = client.get<String>("$BASE_URL/posts")
+                val posts = Json.nonstrict.parse(Post.serializer().list, json)
+                success(posts)
+            } catch (e: Exception) {
+                failure(e)
+            }
         }
     }
 
