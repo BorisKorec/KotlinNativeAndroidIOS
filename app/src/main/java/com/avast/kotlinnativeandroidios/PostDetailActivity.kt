@@ -2,23 +2,18 @@ package com.avast.kotlinnativeandroidios
 
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.avast.kotlinnativeandroidios.model.Comment
-import com.avast.kotlinnativeandroidios.model.Post
 import com.avast.kotlinnativeandroidios.model.PostUserComments
-import com.avast.kotlinnativeandroidios.model.User
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import org.w3c.dom.Text
-import java.util.*
 import kotlin.coroutines.CoroutineContext
 
 class PostDetailActivity : AppCompatActivity(), CoroutineScope {
@@ -48,11 +43,9 @@ class PostDetailActivity : AppCompatActivity(), CoroutineScope {
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = adapter
 
-
         val postId = intent.getIntExtra(EXTEA_POST_ID, -1)
         if (postId >= 0) {
-            val api = PlaceholderApi()
-            api.getPostUserComments(postId, {
+            (application as KotlinNativeApp).api.getPostUserComments(postId, {
                 launch {
                     adapter.data = it
                     adapter.notifyDataSetChanged()

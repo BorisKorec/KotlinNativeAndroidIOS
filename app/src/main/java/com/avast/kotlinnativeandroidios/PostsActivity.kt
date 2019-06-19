@@ -1,8 +1,6 @@
 package com.avast.kotlinnativeandroidios
 
-import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -36,8 +34,7 @@ class PostsActivity : AppCompatActivity(), CoroutineScope {
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = adapter
 
-        val api = PlaceholderApi()
-        api.getPosts(
+        (application as KotlinNativeApp).api.getPosts(
             success = {
                 launch {
                     adapter.posts = it
