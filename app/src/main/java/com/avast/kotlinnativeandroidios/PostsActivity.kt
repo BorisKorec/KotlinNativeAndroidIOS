@@ -1,5 +1,6 @@
 package com.avast.kotlinnativeandroidios
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -19,8 +20,9 @@ import kotlin.coroutines.CoroutineContext
 class PostsActivity : AppCompatActivity(), CoroutineScope {
 
     private lateinit var recyclerView: RecyclerView
+
     private var adapter: PostsAdapter = PostsAdapter {
-        Log.d("PostActivity", "position = $it")
+        startActivity(PostDetailActivity.prepareIntent(this@PostsActivity, it.id))
     }
 
     override val coroutineContext: CoroutineContext
@@ -47,8 +49,8 @@ class PostsActivity : AppCompatActivity(), CoroutineScope {
         )
     }
 
-    class PostsAdapter(private val onItemClick: (Int) -> Unit): RecyclerView.Adapter<PostsAdapter.PostViewHolder>() {
-        var posts: List<Post> = Collections.emptyList()
+    class PostsAdapter(private val onItemClick: (Post) -> Unit): RecyclerView.Adapter<PostsAdapter.PostViewHolder>() {
+        public var posts: List<Post> = Collections.emptyList()
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostViewHolder {
             return PostViewHolder(this, LayoutInflater.from(parent.context).inflate(R.layout.item_post, parent, false))
@@ -67,7 +69,7 @@ class PostsActivity : AppCompatActivity(), CoroutineScope {
 
             init {
                 view.setOnClickListener {
-                    adapter.onItemClick(this@PostViewHolder.adapterPosition)
+                    adapter.onItemClick(adapter.posts[this@PostViewHolder.adapterPosition])
                 }
             }
 

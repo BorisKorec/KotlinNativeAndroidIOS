@@ -4,11 +4,25 @@
               android:layout_width="match_parent"
               android:layout_height="wrap_content">
 
-    <View android:layout_width="match_parent" android:layout_height="1dp"
-          android:background="#999999"/>
-
     <TextView
             android:id="@+id/txtTitle"
+            tools:text="title"
+            android:textColor="#000000"
+            android:textSize="24sp"
+            android:padding="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    <TextView
+            android:id="@+id/txtAuthorName"
+            tools:text="title"
+            android:textSize="16sp"
+            android:padding="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    <TextView
+            android:id="@+id/txtAuthorEmail"
             tools:text="title"
             android:textSize="16sp"
             android:padding="8dp"

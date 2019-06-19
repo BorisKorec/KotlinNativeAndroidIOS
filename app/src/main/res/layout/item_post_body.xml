@@ -4,14 +4,19 @@
               android:layout_width="match_parent"
               android:layout_height="wrap_content">
 
-    <View android:layout_width="match_parent" android:layout_height="1dp"
-          android:background="#999999"/>
-
     <TextView
-            android:id="@+id/txtTitle"
+            android:id="@+id/txtBody"
             tools:text="title"
             android:textSize="16sp"
             android:padding="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    <TextView
+            tools:text="title"
+            android:textSize="16sp"
+            android:padding="8dp"
+            android:text="Comments:"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
