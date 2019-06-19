@@ -14,6 +14,8 @@
 		F4105A8222B1004C00776E0C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4105A8022B1004C00776E0C /* LaunchScreen.storyboard */; };
 		F4105A9522B1023900776E0C /* Shared.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4105A8E22B1023900776E0C /* Shared.framework */; };
 		F4105A9622B1023900776E0C /* Shared.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F4105A8E22B1023900776E0C /* Shared.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		F4105ABB22BA3C9200776E0C /* PostTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4105ABA22BA3C9200776E0C /* PostTableViewController.swift */; };
+		F4105ABD22BA3E8200776E0C /* PostViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4105ABC22BA3E8200776E0C /* PostViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +53,8 @@
 		F4105A8E22B1023900776E0C /* Shared.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Shared.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4105A9022B1023900776E0C /* Shared.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Shared.h; sourceTree = "<group>"; };
 		F4105A9122B1023900776E0C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F4105ABA22BA3C9200776E0C /* PostTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewController.swift; sourceTree = "<group>"; };
+		F4105ABC22BA3E8200776E0C /* PostViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +103,8 @@
 				F4105A7E22B1004C00776E0C /* Assets.xcassets */,
 				F4105A8022B1004C00776E0C /* LaunchScreen.storyboard */,
 				F4105A8322B1004C00776E0C /* Info.plist */,
+				F4105ABA22BA3C9200776E0C /* PostTableViewController.swift */,
+				F4105ABC22BA3E8200776E0C /* PostViewCell.swift */,
 			);
 			path = KotlinNativeAndroidIOS;
 			sourceTree = "<group>";
@@ -226,6 +232,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				F4105A7A22B1004B00776E0C /* ViewController.swift in Sources */,
+				F4105ABB22BA3C9200776E0C /* PostTableViewController.swift in Sources */,
+				F4105ABD22BA3E8200776E0C /* PostViewCell.swift in Sources */,
 				F4105A7822B1004B00776E0C /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
