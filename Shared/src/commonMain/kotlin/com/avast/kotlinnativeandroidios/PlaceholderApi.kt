@@ -2,6 +2,8 @@ package com.avast.kotlinnativeandroidios
 
 import com.avast.kotlinnativeandroidios.model.Comment
 import com.avast.kotlinnativeandroidios.model.Post
+import com.avast.kotlinnativeandroidios.model.PostUserComments
+import com.avast.kotlinnativeandroidios.model.User
 import io.ktor.client.HttpClient
 import io.ktor.client.request.get
 import kotlinx.coroutines.GlobalScope
@@ -49,7 +51,53 @@ class PlaceholderApi {
         }
     }
 
+    fun getUserById(userId: Int, success: (User?) -> Unit, failure: (Throwable?) -> Unit) {
+        if (userMap.isEmpty()) {
+            getUsers(success = {
+                for (user in it) {
+                    userMap.set(user.id, user)
+                }
+                success(userMap.get(userId))
+            }, failure = {
+                failure(it)
+            })
+        } else {
+            success(userMap.get(userId))
+        }
+    }
+
+    fun getUsers(success: (List<User>) -> Unit, failure: (Throwable?) -> Unit) {
+        GlobalScope.launch(ApplicationDispatcher) {
+            try {
+                val json = client.get<String>("$BASE_URL/users")
+                val users = Json.nonstrict.parse(User.serializer().list, json)
+                success(users)
+            } catch (e: Exception) {
+                failure(e)
+            }
+        }
+    }
+
+    fun getPostUserComments(postId: Int, success: (PostUserComments) -> Unit, failure: (Throwable?) -> Unit) {
+        getPost(postId, {
+            val post = it
+            getUserById(it.userId, {
+                val user = it
+                getCommentsForPost(post.id, {
+                    success(PostUserComments(post, user, it))
+                }, {
+                    failure(it)
+                })
+            }, {
+                failure(it)
+            })
+        }, {
+            failure(it)
+        })
+    }
+
     companion object Constants {
         val BASE_URL = "https://jsonplaceholder.typicode.com"
+        val userMap: HashMap<Int, User> = HashMap()
     }
 }
