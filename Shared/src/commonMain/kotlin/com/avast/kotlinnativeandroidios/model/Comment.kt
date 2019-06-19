@@ -3,9 +3,10 @@ package com.avast.kotlinnativeandroidios.model
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class Post(
-    val userId: Int,
+data class Comment(
     val id: Int,
-    val title: String,
+    val postId: Int,
+    val name: String,
+    val email: String,
     val body: String
 )
