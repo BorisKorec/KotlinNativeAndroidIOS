@@ -1,7 +1,9 @@
 package com.avast.kotlinnativeandroidios
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.coroutines.CoroutineScope
@@ -19,13 +21,8 @@ class MainActivity : AppCompatActivity(), CoroutineScope {
         setContentView(R.layout.activity_main)
         findViewById<TextView>(R.id.txtSharedText).text = getSharedModuleString()
 
-        val api = PlaceholderApi()
-
-        api.callGetPost(1) {
-            Log.d("MainActivity", "title: ${it.title}")
-            launch {
-                findViewById<TextView>(R.id.txtSharedText).text = it.title
-            }
+        findViewById<Button>(R.id.btnPosts).setOnClickListener {
+            startActivity(Intent(this@MainActivity, PostsActivity::class.java))
         }
     }
 }

@@ -15,4 +15,7 @@
             android:textSize="20sp"
             tools:text="Hello World!"/>
 
+    <Button android:id="@+id/btnPosts"
+            android:text="Posts"
+            android:layout_width="match_parent" android:layout_height="wrap_content"/>
 </LinearLayout>
