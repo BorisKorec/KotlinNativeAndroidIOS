@@ -84,6 +84,7 @@ class PlaceholderApi {
             val post = it
             getUserById(it.userId, {
                 val user = it
+                success(PostUserComments(post, user))
                 getCommentsForPost(post.id, {
                     success(PostUserComments(post, user, it))
                 }, {
