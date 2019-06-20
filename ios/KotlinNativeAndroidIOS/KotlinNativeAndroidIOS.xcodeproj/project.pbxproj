@@ -16,6 +16,10 @@
 		F4105A9622B1023900776E0C /* Shared.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F4105A8E22B1023900776E0C /* Shared.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F4105ABB22BA3C9200776E0C /* PostTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4105ABA22BA3C9200776E0C /* PostTableViewController.swift */; };
 		F4105ABD22BA3E8200776E0C /* PostViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4105ABC22BA3E8200776E0C /* PostViewCell.swift */; };
+		F4105ABF22BA67E600776E0C /* PostDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4105ABE22BA67E600776E0C /* PostDetailTableViewController.swift */; };
+		F4105AC122BA6F4A00776E0C /* PostTitleVIewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4105AC022BA6F4A00776E0C /* PostTitleVIewCell.swift */; };
+		F4105AC322BB5D1300776E0C /* PostCommentViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4105AC222BB5D1300776E0C /* PostCommentViewCell.swift */; };
+		F4105AC522BB636C00776E0C /* ApiProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4105AC422BB636C00776E0C /* ApiProvider.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +59,10 @@
 		F4105A9122B1023900776E0C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F4105ABA22BA3C9200776E0C /* PostTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewController.swift; sourceTree = "<group>"; };
 		F4105ABC22BA3E8200776E0C /* PostViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewCell.swift; sourceTree = "<group>"; };
+		F4105ABE22BA67E600776E0C /* PostDetailTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailTableViewController.swift; sourceTree = "<group>"; };
+		F4105AC022BA6F4A00776E0C /* PostTitleVIewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTitleVIewCell.swift; sourceTree = "<group>"; };
+		F4105AC222BB5D1300776E0C /* PostCommentViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCommentViewCell.swift; sourceTree = "<group>"; };
+		F4105AC422BB636C00776E0C /* ApiProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiProvider.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,7 +112,11 @@
 				F4105A8022B1004C00776E0C /* LaunchScreen.storyboard */,
 				F4105A8322B1004C00776E0C /* Info.plist */,
 				F4105ABA22BA3C9200776E0C /* PostTableViewController.swift */,
+				F4105ABE22BA67E600776E0C /* PostDetailTableViewController.swift */,
 				F4105ABC22BA3E8200776E0C /* PostViewCell.swift */,
+				F4105AC022BA6F4A00776E0C /* PostTitleVIewCell.swift */,
+				F4105AC222BB5D1300776E0C /* PostCommentViewCell.swift */,
+				F4105AC422BB636C00776E0C /* ApiProvider.swift */,
 			);
 			path = KotlinNativeAndroidIOS;
 			sourceTree = "<group>";
@@ -231,8 +243,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F4105ABF22BA67E600776E0C /* PostDetailTableViewController.swift in Sources */,
+				F4105AC522BB636C00776E0C /* ApiProvider.swift in Sources */,
 				F4105A7A22B1004B00776E0C /* ViewController.swift in Sources */,
+				F4105AC322BB5D1300776E0C /* PostCommentViewCell.swift in Sources */,
 				F4105ABB22BA3C9200776E0C /* PostTableViewController.swift in Sources */,
+				F4105AC122BA6F4A00776E0C /* PostTitleVIewCell.swift in Sources */,
 				F4105ABD22BA3E8200776E0C /* PostViewCell.swift in Sources */,
 				F4105A7822B1004B00776E0C /* AppDelegate.swift in Sources */,
 			);

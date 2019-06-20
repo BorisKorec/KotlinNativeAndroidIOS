@@ -12,16 +12,24 @@ import Shared
 class PostsTableViewController: UITableViewController {
     
     var posts: [Post]?
+    let api = ApiProvider.provideApi()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let api = PlaceholderApi()
         api.getPosts(success: { posts -> KotlinUnit in
             self.posts = posts
             self.tableView.reloadData()
             return KotlinUnit()
         }) { throwable -> KotlinUnit in
             return KotlinUnit()
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let controller = segue.destination as? PostDetailTableViewController {
+            if let cell = sender as? PostViewCell {
+                controller.postId = cell.postId
+            }
         }
     }
     
@@ -35,6 +43,7 @@ class PostsTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "postViewCell") as! PostViewCell
         if let post = posts?[indexPath.row] {
             cell.label.text = post.title
+            cell.postId = post.id
         }
         return cell
     }

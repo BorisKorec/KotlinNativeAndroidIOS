@@ -9,6 +9,6 @@
 import UIKit
 
 class PostViewCell: UITableViewCell {
-    
+    var postId: Int32?
     @IBOutlet var label: UILabel!
 }
