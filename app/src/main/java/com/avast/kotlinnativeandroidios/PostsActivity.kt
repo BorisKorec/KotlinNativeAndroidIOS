@@ -9,18 +9,37 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.avast.kotlinnativeandroidios.model.Post
+import com.avast.kotlinnativeandroidios.modules.posts.PostsPresenter
+import com.avast.kotlinnativeandroidios.modules.posts.PostsView
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.util.*
 import kotlin.coroutines.CoroutineContext
 
-class PostsActivity : AppCompatActivity(), CoroutineScope {
+class PostsActivity : AppCompatActivity(), CoroutineScope, PostsView {
+
+    override fun showPosts(posts: List<Post>) {
+        launch {
+            adapter.posts = posts
+            adapter.notifyDataSetChanged()
+        }
+    }
+
+    override fun showError(e: Throwable?) {
+        TODO("not implemented")
+    }
+
+    override fun showDetail(postId: Int) {
+        startActivity(PostDetailActivity.prepareIntent(this@PostsActivity, postId))
+    }
+
+    private lateinit var presenter: PostsPresenter
 
     private lateinit var recyclerView: RecyclerView
 
     private var adapter: PostsAdapter = PostsAdapter {
-        startActivity(PostDetailActivity.prepareIntent(this@PostsActivity, it.id))
+        presenter.onPostClick(it.id)
     }
 
     override val coroutineContext: CoroutineContext
@@ -34,16 +53,8 @@ class PostsActivity : AppCompatActivity(), CoroutineScope {
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = adapter
 
-        (application as KotlinNativeApp).api.getPosts(
-            success = {
-                launch {
-                    adapter.posts = it
-                    adapter.notifyDataSetChanged()
-                }
-            },
-            failure = {
-            }
-        )
+        presenter = PostsPresenter((application as KotlinNativeApp).api, this)
+        presenter.onStart()
     }
 
     class PostsAdapter(private val onItemClick: (Post) -> Unit): RecyclerView.Adapter<PostsAdapter.PostViewHolder>() {
