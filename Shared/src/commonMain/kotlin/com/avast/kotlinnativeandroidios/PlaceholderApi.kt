@@ -15,6 +15,10 @@ class PlaceholderApi {
     val client = HttpClient()
     val userMap: HashMap<Int, User> = HashMap()
 
+    init {
+        logMessage("PlaceholderApi.init")
+    }
+
     fun getPost(id: Int, success: (Post) -> Unit, failure: (Throwable?) -> Unit) {
         GlobalScope.launch(ApplicationDispatcher) {
             try {
