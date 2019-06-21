@@ -2,7 +2,6 @@ package com.avast.kotlinnativeandroidios
 
 import com.avast.kotlinnativeandroidios.model.Comment
 import com.avast.kotlinnativeandroidios.model.Post
-import com.avast.kotlinnativeandroidios.model.PostUserComments
 import com.avast.kotlinnativeandroidios.model.User
 import io.ktor.client.HttpClient
 import io.ktor.client.request.get
@@ -77,25 +76,6 @@ class PlaceholderApi {
                 failure(e)
             }
         }
-    }
-
-    fun getPostUserComments(postId: Int, success: (PostUserComments) -> Unit, failure: (Throwable?) -> Unit) {
-        getPost(postId, {
-            val post = it
-            getUserById(it.userId, {
-                val user = it
-                success(PostUserComments(post, user))
-                getCommentsForPost(post.id, {
-                    success(PostUserComments(post, user, it))
-                }, {
-                    failure(it)
-                })
-            }, {
-                failure(it)
-            })
-        }, {
-            failure(it)
-        })
     }
 
     companion object Constants {
