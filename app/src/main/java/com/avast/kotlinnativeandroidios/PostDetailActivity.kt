@@ -10,13 +10,44 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.avast.kotlinnativeandroidios.model.PostUserComments
+import com.avast.kotlinnativeandroidios.model.Comment
+import com.avast.kotlinnativeandroidios.model.Post
+import com.avast.kotlinnativeandroidios.model.User
+import com.avast.kotlinnativeandroidios.modules.postDetail.PostDetailPresenter
+import com.avast.kotlinnativeandroidios.modules.postDetail.PostDetailView
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlin.coroutines.CoroutineContext
 
-class PostDetailActivity : AppCompatActivity(), CoroutineScope {
+class PostDetailActivity : AppCompatActivity(), CoroutineScope, PostDetailView {
+
+    override fun showPost(post: Post) {
+        launch {
+            adapter.post = post
+            adapter.notifyDataSetChanged()
+        }
+    }
+
+    override fun showUserForPost(user: User) {
+        launch {
+            adapter.user = user
+            adapter.notifyDataSetChanged()
+        }
+    }
+
+    override fun showComments(comments: List<Comment>) {
+        launch {
+            adapter.comments = comments
+            adapter.notifyDataSetChanged()
+        }
+    }
+
+    override fun showError(e: Throwable?) {
+        TODO("not implemented")
+    }
+
+    private lateinit var presenter: PostDetailPresenter
 
     private lateinit var recyclerView: RecyclerView
 
@@ -43,21 +74,17 @@ class PostDetailActivity : AppCompatActivity(), CoroutineScope {
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = adapter
 
+        presenter = PostDetailPresenter((application as KotlinNativeApp).api, this)
         val postId = intent.getIntExtra(EXTEA_POST_ID, -1)
-        if (postId >= 0) {
-            (application as KotlinNativeApp).api.getPostUserComments(postId, {
-                launch {
-                    adapter.data = it
-                    adapter.notifyDataSetChanged()
-                }
-            }, {})
-        }
+        presenter.onStart(postId)
     }
 
 
 
     class PostDetailAdapter(): RecyclerView.Adapter<PostDetailAdapter.PostDetailViewHolder>() {
-        public var data: PostUserComments? = null
+        var post: Post? = null
+        var user: User? = null
+        var comments: List<Comment>? = null
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostDetailViewHolder {
             if (viewType == 0) {
@@ -78,21 +105,23 @@ class PostDetailActivity : AppCompatActivity(), CoroutineScope {
         }
 
         override fun getItemCount(): Int {
-            if (data != null) {
-                return data!!.comments.size + 2
-            } else {
-                return 0
+            var count = 0
+            if (user != null) {
+                count += 2
+                if (comments != null) {
+                    count += comments!!.size
+                }
             }
+            return count
         }
 
         override fun onBindViewHolder(holder: PostDetailViewHolder, position: Int) {
             if (position == 0) {
-                (holder as PostDetailTitleViewHolder).bindData(data!!.post.title, data!!.user?.name, data!!.user?.email)
+                (holder as PostDetailTitleViewHolder).bindData(post!!.title, user?.name, user?.email)
             } else if (position == 1) {
-                (holder as PostDetailBodyViewHolder).bindBody(data!!.post.body)
+                (holder as PostDetailBodyViewHolder).bindBody(post!!.body)
             } else {
-
-                (holder as PostDetailCommentViewHolder).bindComment(data!!.comments[position - 2].body, data!!.comments[position - 2].name)
+                (holder as PostDetailCommentViewHolder).bindComment(comments!![position - 2].body, comments!![position - 2].name)
             }
         }
 
