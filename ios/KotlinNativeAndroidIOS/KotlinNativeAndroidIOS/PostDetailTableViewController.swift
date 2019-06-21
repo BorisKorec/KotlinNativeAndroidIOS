@@ -11,49 +11,53 @@ import Shared
 
 class PostDetailTableViewController: UITableViewController {
     
-    var postId: Int32?
-    var data: PostUserComments?
-    let api = ApiProvider.provideApi()
+    var postId: Int32 = -1
+    
+    var post: Post?
+    var user: User?
+    var comments: [Comment]?
+    
+    var presenter: PostDetailPresenter?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 300
-        
-        guard let postId = self.postId else {
-            return
-        }
-        
-        api.getPostUserComments(postId: postId, success: { result -> KotlinUnit in
-            self.data = result
-            self.tableView.reloadData()
-            return KotlinUnit()
-        }, failure: { error -> KotlinUnit in
-            return KotlinUnit()
-        })
+    
+        presenter = PostDetailPresenter.init(api: ApiProvider.provideApi(), view: self)
+        presenter?.onStart(postId: postId)
     }
     
     // MARK: UITableViewDataSource
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return data != nil ? data!.comments.count + 1 : 0
+        var count = 0
+        if user != nil {
+            count += 1
+            if comments != nil {
+                count += comments!.count
+            }
+        }
+        return count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "postTitle") as! PostTitleViewCell
-            if let data = self.data {
-                cell.title.text = data.post.title
-                cell.authorName.text = data.user?.name
-                cell.authorEmail.text = data.user?.email
-                cell.body.text = data.post.body
+            if let post = self.post {
+                cell.title.text = post.title
+                cell.body.text = post.body
+            }
+            if let user = self.user {
+                cell.authorName.text = user.name
+                cell.authorEmail.text = user.email
             }
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "postComment") as! PostCommentViewCell
-            if let data = self.data {
-                let comment = data.comments[indexPath.row - 1]
+            if let comments = self.comments {
+                let comment = comments[indexPath.row - 1]
                 cell.comment.text = comment.body
                 cell.author.text = comment.name
             }
@@ -61,4 +65,22 @@ class PostDetailTableViewController: UITableViewController {
         }
     }
     
+}
+
+extension PostDetailTableViewController: PostDetailView {
+    func showPost(post: Post) {
+        self.post = post
+        self.tableView.reloadData()
+    }
+    func showUserForPost(user: User) {
+        self.user = user
+        self.tableView.reloadData()
+    }
+    func showComments(comments: [Comment]) {
+        self.comments = comments
+        self.tableView.reloadData()
+    }
+    func showError(e: KotlinThrowable?) {
+        // TODO not implemented
+    }
 }
