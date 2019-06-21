@@ -90,7 +90,6 @@
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="label" destination="Pwb-pG-pDK" id="mjL-gE-pUD"/>
-                                    <segue destination="CdX-vj-YMs" kind="show" id="ZTx-Dn-cDp"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -99,6 +98,9 @@
                             <outlet property="delegate" destination="PWw-pQ-znZ" id="16i-wc-Y6G"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <segue destination="CdX-vj-YMs" kind="show" identifier="showPostDetail" id="f33-XH-wD6"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WcI-in-Pv6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

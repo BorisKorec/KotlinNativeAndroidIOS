@@ -12,23 +12,19 @@ import Shared
 class PostsTableViewController: UITableViewController {
     
     var posts: [Post]?
-    let api = ApiProvider.provideApi()
+
+    var presenter: PostsPresenter?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        api.getPosts(success: { posts -> KotlinUnit in
-            self.posts = posts
-            self.tableView.reloadData()
-            return KotlinUnit()
-        }) { throwable -> KotlinUnit in
-            return KotlinUnit()
-        }
+        presenter = PostsPresenter.init(api: ApiProvider.provideApi(), view: self)
+        presenter?.onStart()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let controller = segue.destination as? PostDetailTableViewController {
-            if let cell = sender as? PostViewCell {
-                controller.postId = cell.postId
+            if let postId = sender as? Int32 {
+                controller.postId = postId
             }
         }
     }
@@ -51,6 +47,23 @@ class PostsTableViewController: UITableViewController {
     // MARK: UITableViewDelegate
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // TODO
+        if let post = posts?[indexPath.row] {
+            presenter?.onPostClick(postId: post.id)
+        }
+    }
+}
+
+extension PostsTableViewController: PostsView {
+    func showPosts(posts: [Post]) {
+        self.posts = posts
+        self.tableView.reloadData()
+    }
+    
+    func showError(e: KotlinThrowable?) {
+        // TODO not implemented
+    }
+    
+    func showDetail(postId: Int32) {
+        performSegue(withIdentifier: "showPostDetail", sender: postId)
     }
 }
